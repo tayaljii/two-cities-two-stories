@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Cities. Two Stories. — Roorkee &amp; Joshimath</title>
+
+<!-- Fonts: Fraunces (editorial display serif) + IBM Plex Sans (body) + IBM Plex Mono (technical labels) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* =========================================================
+   THEME — "Field Notes from the Himalaya"
+   Documentary-editorial system: deep ink base, muted cream
+   paper, Roorkee (sandstone/brick/canal-blue) vs Joshimath
+   (Himalayan blue/snow/forest) chapter palettes.
+   Authored at a fixed 1920×1080 stage.
+   ========================================================= */
+:root{
+  /* Base */
+  --ink:#14171C;            /* deep slate ink */
+  --ink-2:#1C2027;
+  --ink-3:#232830;
+  --paper:#F4EFE6;          /* muted cream */
+  --paper-2:#EAE2D3;
+  --fog:#9AA1AC;            /* stone grey text on dark */
+  --line:rgba(255,255,255,.14);
+
+  /* Roorkee chapter */
+  --sandstone:#C8965A;
+  --brick:#A34A2A;
+  --canal-blue:#3E7E9E;
+  --rkt-text:#EFE6D6;
+
+  /* Joshimath chapter */
+  --himalaya-blue:#33587A;
+  --himalaya-blue-2:#4E7BA6;
+  --snow:#EDF2F5;
+  --forest:#3E6B4F;
+  --saffron:#D9822B;        /* temple accent */
+
+  /* Type */
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'IBM Plex Sans', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+  --title-size:96px;
+  --body-size:26px;
+  --small-size:19px;
+  --micro-size:14.5px;
+
+  /* Motion */
+  --ease:cubic-bezier(.16,1,.3,1);
+  --dur:.7s;
+
+  --stage-bg:#000;
+  --slide-bg:var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+img{display:block}
+
+/* === FIXED 16:9 STAGE: MANDATORY BASE STYLES (viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+.deck-controls { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 1000; }
+@media print {
+  html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+  .deck-viewport { position: static; overflow: visible; background: #fff; }
+  .deck-stage { position: static; width: auto; height: auto; transform: none !important; background: none; }
+  .slide { position: relative; display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; width: 1920px; height: 1080px; break-after: page; page-break-after: always; }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .deck-controls { display: none !important; }
+  .slide-inner { padding: 72px 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+
+/* === SHARED SLIDE FURNITURE === */
+.slide-inner{position:absolute;inset:0;padding:72px 96px 128px;display:flex;flex-direction:column}
+.kicker{font-family:var(--font-mono);font-size:var(--micro-size);letter-spacing:.28em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:18px}
+.kicker::before{content:"";width:46px;height:2px;background:currentColor;opacity:.55}
+.kicker.rkt{color:var(--sandstone)} .kicker.josh{color:var(--himalaya-blue-2)}
+.slide-title{font-family:var(--font-display);font-weight:560;font-size:64px;line-height:1.06;letter-spacing:-.01em;color:var(--paper);margin-top:14px}
+.slide-title em{font-style:italic;font-weight:420;color:var(--sandstone)}
+.slide-title.josh em{color:var(--himalaya-blue-2)}
+.slide-sub{font-family:var(--font-body);font-size:var(--small-size);color:var(--fog);max-width:900px;line-height:1.5}
+.body-txt{font-family:var(--font-body);font-size:var(--body-size);color:var(--paper);line-height:1.55}
+.src{position:absolute;left:96px;bottom:30px;font-family:var(--font-mono);font-size:12.5px;color:rgba(154,161,172,.75);letter-spacing:.02em;max-width:620px}
+.pagechip{position:absolute;right:96px;bottom:30px;font-family:var(--font-mono);font-size:12.5px;color:rgba(154,161,172,.75);letter-spacing:.18em}
+.photo-frame{position:relative;overflow:hidden;border-radius:6px;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.photo-frame img{width:100%;height:100%;object-fit:cover}
+.ph-caption{position:absolute;left:0;right:0;bottom:0;padding:44px 22px 14px;font-family:var(--font-mono);font-size:12.5px;color:rgba(244,239,230,.9);background:linear-gradient(180deg,transparent,rgba(10,12,16,.78));letter-spacing:.04em}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E")}
+
+/* === ANIMATION PRIMITIVES === */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.slide.visible .reveal{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-40px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.slide.visible .reveal-l{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(40px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.slide.visible .reveal-r{opacity:1;transform:none}
+.scale-in{opacity:0;transform:scale(.96);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.slide.visible .scale-in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.26s}.d3{transition-delay:.4s}.d4{transition-delay:.54s}
+.d5{transition-delay:.68s}.d6{transition-delay:.82s}.d7{transition-delay:.96s}.d8{transition-delay:1.1s}
+.slide:not(.visible) .reveal,.slide:not(.visible) .reveal-l,.slide:not(.visible) .reveal-r{transition:none}
+
+/* Keyframes for looping scene animations */
+@keyframes flowX{to{transform:translateX(-52px)}}
+@keyframes dashDraw{to{stroke-dashoffset:0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+
+/* ════════ SLIDE 1 — OPENING (cinematic split) ════════ */
+.s-open .half{position:absolute;top:0;bottom:0;width:50.2%;overflow:hidden}
+.s-open .half img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 2.6s var(--ease),filter 2.6s var(--ease);filter:saturate(.82) brightness(.9)}
+.s-open .half.l{left:0}
+.s-open .half.r{right:0}
+.slide.visible.s-open .half img{transform:scale(1)}
+.half .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,18,.42),rgba(12,14,18,.18) 42%,rgba(12,14,18,.72))}
+.half .geo{position:absolute;left:64px;bottom:200px;font-family:var(--font-mono);font-size:16px;letter-spacing:.24em;color:var(--paper);opacity:.92}
+.half .geo b{display:block;font-family:var(--font-display);font-weight:560;font-size:30px;letter-spacing:.02em;margin-top:10px}
+.half .geo span{display:block;font-family:var(--font-body);font-size:15px;color:rgba(244,239,230,.75);margin-top:6px;letter-spacing:.06em}
+.s-open .centerline{position:absolute;top:0;bottom:0;left:50%;width:1px;background:linear-gradient(180deg,transparent,rgba(244,239,230,.55),transparent)}
+.s-open .title-block{position:absolute;left:0;right:0;top:150px;text-align:center;color:var(--paper)}
+.s-open .kicker-c{font-family:var(--font-mono);font-size:15px;letter-spacing:.34em;color:rgba(244,239,230,.85);text-transform:uppercase}
+.s-open h1{font-family:var(--font-display);font-size:118px;font-weight:580;line-height:.98;letter-spacing:.005em;margin-top:22px;text-shadow:0 4px 40px rgba(0,0,0,.45)}
+.s-open h1 .amp{font-style:italic;font-weight:340;font-size:64px;vertical-align:middle;padding:0 8px;color:rgba(244,239,230,.85)}
+.s-open .subtitle{font-family:var(--font-body);font-size:24px;color:rgba(244,239,230,.88);margin-top:26px;letter-spacing:.02em}
+.s-open .presenters{position:absolute;left:0;right:0;bottom:112px;display:flex;justify-content:center;gap:64px;color:var(--paper)}
+.pchip{display:flex;align-items:center;gap:14px;font-family:var(--font-body)}
+.pchip .dot{width:11px;height:11px;border-radius:50%;background:var(--sandstone);box-shadow:0 0 14px rgba(200,150,90,.9)}
+.pchip.j .dot{background:var(--himalaya-blue-2);box-shadow:0 0 14px rgba(78,123,166,.9)}
+.pchip b{font-size:20px;font-weight:600;letter-spacing:.02em}
+.pchip span{font-size:15px;color:rgba(244,239,230,.72)}
+
+/* ════════ SLIDE 2 — THE JOURNEY (map) ════════ */
+.s-map{background:linear-gradient(180deg,#10141B,#171C24)}
+.journey-grid{display:grid;grid-template-columns:1.42fr 1fr;gap:64px;flex:1;min-height:0;margin-top:34px}
+.map-wrap{position:relative}
+.map-svg{position:absolute;inset:0;width:100%;height:100%}
+.route-path{fill:none;stroke:var(--sandstone);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:10 9;stroke-dashoffset:1400;opacity:.95}
+.slide.visible .route-path{animation:dashDraw 3.4s .5s var(--ease) forwards}
+.route-done{fill:none;stroke:rgba(200,150,90,.25);stroke-width:3.4;stroke-linecap:round}
+.city{fill:var(--paper);stroke:var(--ink);stroke-width:3}
+.city-label{font-family:var(--font-mono);font-size:16.5px;fill:var(--paper);letter-spacing:.06em}
+.city-sub{font-family:var(--font-mono);font-size:12.5px;fill:var(--fog)}
+.city-pop{opacity:0;transform-origin:center}
+.slide.visible .city-pop{animation:pulseIn .6s var(--ease) forwards}
+@keyframes pulseIn{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+.state-shape{fill:rgba(62,123,166,.10);stroke:rgba(122,160,196,.55);stroke-width:2.2;stroke-linejoin:round}
+.peak-line{stroke:rgba(154,161,172,.4);stroke-width:1.6;fill:none}
+.journey-side{display:flex;flex-direction:column;gap:26px;min-height:0}
+.leg-list{list-style:none;display:flex;flex-direction:column;gap:0;border-left:2px solid rgba(200,150,90,.4);padding-left:0;margin-top:6px}
+.leg{position:relative;padding:13px 0 13px 28px;font-family:var(--font-body);font-size:19px;color:var(--paper-2);line-height:1.4}
+.leg::before{content:"";position:absolute;left:-7px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--paper-2);border:2.5px solid var(--ink);box-shadow:0 0 0 2px rgba(200,150,90,.5)}
+.leg b{color:var(--paper);font-weight:600}
+.leg span{color:var(--fog);font-size:16px}
+.leg.j::before{background:var(--himalaya-blue-2)}
+.elev-strip{margin-top:auto;background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:18px 22px 12px}
+.elev-strip h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;color:var(--fog);text-transform:uppercase;margin-bottom:6px}
+
+/* ════════ SLIDE 3 — ROORKEE HISTORY ════════ */
+.s-rkt-history .hero-strip{position:relative;height:430px;border-radius:8px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.s-rkt-history .hero-strip img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:36px}
+.tl-card{background:var(--ink-2);border:1px solid var(--line);border-top:3px solid var(--sandstone);border-radius:8px;padding:24px 24px 22px;min-height:220px}
+.tl-card .yr{font-family:var(--font-display);font-size:40px;font-weight:560;color:var(--sandstone);line-height:1}
+.tl-card h4{font-family:var(--font-body);font-weight:600;font-size:20px;color:var(--paper);margin:10px 0 8px}
+.tl-card p{font-family:var(--font-body);font-size:16.5px;color:var(--fog);line-height:1.5}
+.tl-card .tag{display:inline-block;margin-top:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;color:var(--sandstone);text-transform:uppercase}
+
+/* ════════ SLIDE 4 — SOLANI AQUEDUCT ════════ */
+.s-aqueduct{background:linear-gradient(180deg,#10141B,#141A21)}
+.aq-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;flex:1;min-height:0;margin-top:30px}
+.aq-diagram{background:var(--ink-2);border:1px solid var(--line);border-radius:10px;position:relative;overflow:hidden}
+.aq-svg{position:absolute;inset:0;width:100%;height:100%}
+.water{stroke:var(--canal-blue);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:30 22;opacity:.95}
+.river{stroke:var(--himalaya-blue-2);stroke-width:7;fill:none;stroke-linecap:round;stroke-dasharray:38 26;opacity:.8}
+.slide.visible .anim-water{animation:flowX 1.6s linear infinite}
+.slide.visible .anim-river{animation:flowX 2.2s linear infinite}
+.aq-label{font-family:var(--font-mono);font-size:15.5px;fill:var(--paper-2);letter-spacing:.08em}
+.aq-label.dim{fill:var(--fog);font-size:12.5px}
+.aq-facts{display:flex;flex-direction:column;gap:20px}
+.fact-row{display:flex;gap:20px;background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:18px 22px;align-items:baseline}
+.fact-row .num{font-family:var(--font-display);font-size:44px;font-weight:560;color:var(--sandstone);min-width:150px;line-height:1}
+.fact-row .num small{font-size:20px;font-weight:400;font-family:var(--font-body);color:var(--fog)}
+.fact-row p{font-family:var(--font-body);font-size:17px;color:var(--paper-2);line-height:1.45}
+
+/* ════════ SLIDE 5 — ENGINEERING LEGACY ════════ */
+.s-legacy .legacy-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;flex:1;min-height:0;margin-top:32px}
+.vtimeline{list-style:none;display:flex;flex-direction:column;justify-content:space-between;position:relative;padding-left:34px}
+.vtimeline::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--sandstone),rgba(200,150,90,.15))}
+.vt{position:relative;padding:10px 0 10px 22px}
+.vt::before{content:"";position:absolute;left:-31px;top:22px;width:13px;height:13px;border-radius:50%;background:var(--sandstone);border:3px solid var(--ink);box-shadow:0 0 0 2px rgba(200,150,90,.45)}
+.vt .yr{font-family:var(--font-display);font-size:27px;font-weight:600;color:var(--sandstone);line-height:1}
+.vt h4{font-family:var(--font-body);font-size:19.5px;font-weight:600;color:var(--paper);margin-top:5px}
+.vt p{font-family:var(--font-body);font-size:15.5px;color:var(--fog);line-height:1.45;margin-top:4px;max-width:740px}
+.legacy-photos{display:grid;grid-template-rows:1fr 1fr;gap:24px;min-height:0}
+
+/* ════════ SLIDE 6 — ROORKEE PLACES ════════ */
+.s-places .place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;flex:1;min-height:0;margin-top:32px}
+.place-card{display:flex;flex-direction:column;background:var(--ink-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:0}
+.place-card .ph{position:relative;flex:1.15;min-height:0;overflow:hidden}
+.place-card .ph img{width:100%;height:100%;object-fit:cover}
+.place-card .pc-body{padding:20px 24px 18px;flex:1}
+.place-card h4{font-family:var(--font-display);font-size:27px;font-weight:560;color:var(--paper)}
+.place-card .dist{font-family:var(--font-mono);font-size:12px;color:var(--sandstone);letter-spacing:.16em;text-transform:uppercase;margin-top:4px}
+.place-card p{font-family:var(--font-body);font-size:16px;color:var(--fog);line-height:1.5;margin-top:10px}
+
+/* ════════ SLIDE 7 — JOSHIMATH GATEWAY ════════ */
+.s-gateway .full-bleed{position:absolute;inset:0}
+.s-gateway .full-bleed img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transform:scale(1.05);transition:transform 2.8s var(--ease)}
+.slide.visible .s-gateway-scale,.slide.visible.s-gateway .full-bleed img{transform:scale(1)}
+.s-gateway .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,13,18,.9) 0%,rgba(10,13,18,.72) 34%,rgba(10,13,18,.15) 70%)}
+.s-gateway .content{position:relative;height:100%;padding:76px 96px;display:flex;flex-direction:column;max-width:1010px}
+.s-gateway .stat-row{display:flex;gap:22px;margin-top:auto}
+.stat-chip{background:rgba(18,23,30,.72);border:1px solid rgba(122,160,196,.35);border-radius:8px;padding:16px 22px;backdrop-filter:blur(3px)}
+.stat-chip .v{font-family:var(--font-display);font-size:34px;font-weight:560;color:var(--snow);line-height:1.05;white-space:nowrap}
+.stat-chip .v small{font-size:17px;font-weight:400;color:var(--fog);font-family:var(--font-body)}
+.stat-chip .k{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(173,199,220,.85);margin-top:6px}
+
+/* ════════ SLIDE 8 — HERITAGE ════════ */
+.s-heritage .her-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:56px;flex:1;min-height:0;margin-top:30px}
+.her-photos{display:grid;grid-template-rows:1.5fr 1fr;gap:22px;min-height:0}
+.her-points{display:flex;flex-direction:column;gap:22px;margin-top:26px;justify-content:center}
+.her-point{display:flex;gap:20px;padding:16px 20px;background:var(--ink-2);border:1px solid var(--line);border-left:3px solid var(--himalaya-blue-2);border-radius:8px}
+.her-point .ic{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--himalaya-blue-2);text-transform:uppercase;min-width:132px;padding-top:4px}
+.her-point h4{font-family:var(--font-body);font-size:19.5px;font-weight:600;color:var(--paper)}
+.her-point p{font-family:var(--font-body);font-size:15.5px;color:var(--fog);line-height:1.48;margin-top:4px}
+
+/* ════════ SLIDE 9 — BEYOND (destination map) ════════ */
+.s-beyond .dest-grid{display:grid;grid-template-columns:0.95fr 1.3fr;gap:52px;flex:1;min-height:0;margin-top:28px}
+.dest-map{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.dest-map svg{position:absolute;inset:0;width:100%;height:100%}
+.dest-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0}
+.dest-card{display:flex;gap:16px;background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:14px;min-height:0}
+.dest-card img{width:96px;height:100%;object-fit:cover;border-radius:5px;flex-shrink:0}
+.dest-card .d-body{min-width:0}
+.dest-card h5{font-family:var(--font-body);font-size:17.5px;font-weight:600;color:var(--paper);white-space:nowrap}
+.dest-card .km{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--himalaya-blue-2);text-transform:uppercase;margin-top:2px}
+.dest-card p{font-family:var(--font-body);font-size:13.5px;color:var(--fog);line-height:1.38;margin-top:5px}
+.dest-node{fill:var(--snow);stroke:var(--himalaya-blue);stroke-width:2.5}
+.dest-num{font-family:var(--font-mono);font-size:13px;fill:var(--ink);font-weight:500}
+.dest-name{font-family:var(--font-mono);font-size:13.5px;fill:var(--paper-2);letter-spacing:.08em}
+
+/* ════════ SLIDE 10 — SUBSIDENCE ════════ */
+.s-subs .sub-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:50px;flex:1;min-height:0;margin-top:26px}
+.sub-diagram{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sub-diagram svg{position:absolute;inset:0;width:100%;height:100%}
+.sub-layer{font-family:var(--font-mono);font-size:14px;fill:var(--paper-2);letter-spacing:.08em}
+.sub-label{font-family:var(--font-mono);font-size:12.5px;fill:var(--fog)}
+.slide.visible .crack{stroke-dasharray:260;stroke-dashoffset:260;animation:dashDraw 1.6s 1s var(--ease) forwards}
+.slide.visible .seep{animation:pulse 2.4s 1.4s infinite}
+.sub-steps{display:flex;flex-direction:column;gap:13px}
+.sub-step{background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:14px 20px}
+.sub-step .hd{display:flex;align-items:baseline;gap:14px}
+.sub-step .yr{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--saffron);min-width:74px}
+.sub-step h4{font-family:var(--font-body);font-size:18px;font-weight:600;color:var(--paper)}
+.sub-step p{font-family:var(--font-body);font-size:14.5px;color:var(--fog);line-height:1.42;margin-top:5px;padding-left:88px}
+.verdict{margin-top:14px;border:1px dashed rgba(217,130,43,.5);border-radius:8px;padding:13px 18px;font-family:var(--font-body);font-size:14.5px;color:var(--paper-2);line-height:1.45}
+.verdict b{color:var(--saffron)}
+
+/* ════════ SLIDE 11 — COMPARISON ════════ */
+.s-compare{background:linear-gradient(180deg,#10141B,#141A21)}
+.cmp-grid{display:grid;grid-template-columns:1fr 88px 1fr;flex:1;min-height:0;margin-top:34px}
+.cmp-col{background:var(--ink-2);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;padding:30px 34px;min-height:0}
+.cmp-col.rkt{border-top:5px solid var(--sandstone)}
+.cmp-col.josh{border-top:5px solid var(--himalaya-blue-2)}
+.cmp-col h3{font-family:var(--font-display);font-size:40px;font-weight:580;color:var(--paper)}
+.cmp-col .sub{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--fog);margin-top:6px}
+.cmp-items{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:23px}
+.cmp-items li{font-family:var(--font-body);font-size:19px;color:var(--paper-2);line-height:1.44;padding-left:26px;position:relative}
+.cmp-items li::before{content:"";position:absolute;left:0;top:11px;width:10px;height:10px;border-radius:2px;background:var(--sandstone)}
+.cmp-col.josh .cmp-items li::before{background:var(--himalaya-blue-2);border-radius:50%}
+.cmp-img{margin-top:auto;border-radius:8px;overflow:hidden;height:250px}
+.cmp-img img{width:100%;height:100%;object-fit:cover}
+.cmp-mid{display:flex;align-items:center;justify-content:center}
+.cmp-mid .vs{font-family:var(--font-display);font-style:italic;font-weight:340;font-size:34px;color:var(--fog)}
+.cmp-lesson{margin-top:26px;text-align:center;font-family:var(--font-display);font-style:italic;font-size:29px;font-weight:420;color:var(--paper)}
+.cmp-lesson b{color:var(--sandstone);font-style:normal;font-weight:600}
+
+/* ════════ SLIDE 12 — PERSONAL ════════ */
+.s-personal .per-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;flex:1;min-height:0;margin-top:34px}
+.per-card{background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:36px 40px;display:flex;flex-direction:column;min-height:0}
+.per-card.rkt{border-left:5px solid var(--sandstone)}
+.per-card.josh{border-left:5px solid var(--himalaya-blue-2)}
+.per-card .who{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--fog)}
+.per-card .who b{display:block;font-family:var(--font-body);font-size:24px;font-weight:600;letter-spacing:.02em;text-transform:none;color:var(--paper);margin-top:8px}
+.per-card blockquote{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:31px;line-height:1.44;color:var(--paper);margin-top:auto;margin-bottom:auto}
+.per-card blockquote::before{content:"“";font-size:76px;color:var(--sandstone);font-style:normal;line-height:0;vertical-align:-18px;margin-right:6px}
+.per-card.josh blockquote::before{color:var(--himalaya-blue-2)}
+.per-card .notes{margin-top:auto;padding-top:18px;font-family:var(--font-body);font-size:14.5px;color:var(--fog);line-height:1.45}
+.shared-line{margin-top:30px;background:linear-gradient(90deg,rgba(200,150,90,.16),rgba(78,123,166,.16));border:1px solid var(--line);border-radius:10px;padding:20px 34px;text-align:center;font-family:var(--font-display);font-style:italic;font-size:27px;color:var(--paper)}
+
+/* ════════ SLIDE 13 — CLOSING ════════ */
+.s-close .close-strip{position:absolute;left:0;right:0;top:0;height:56%;display:grid;grid-template-columns:1fr 1fr}
+.s-close .close-strip .cs{position:relative;overflow:hidden}
+.s-close .close-strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.85)}
+.s-close .close-strip .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,18,.25),rgba(12,14,18,.85))}
+.s-close .close-body{position:absolute;left:0;right:0;top:47%;bottom:0;text-align:center;padding:0 120px;color:var(--paper);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.s-close h1{font-family:var(--font-display);font-size:66px;font-weight:580;line-height:1.1;letter-spacing:-.005em}
+.s-close h1 em{font-style:italic;font-weight:400;color:var(--sandstone)}
+.s-close .thanks{font-family:var(--font-mono);font-size:15px;letter-spacing:.34em;color:rgba(244,239,230,.8);text-transform:uppercase;margin-top:28px}
+.s-close .presenters{display:flex;justify-content:center;gap:70px;margin-top:30px}
+
+/* ════════ SLIDE 14 — SOURCES ════════ */
+.s-src{background:var(--ink)}
+.src-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;flex:1;min-height:0;margin-top:30px}
+.src-col h4{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--sandstone);margin-bottom:14px}
+.src-col.j h4{color:var(--himalaya-blue-2)}
+.src-col ol{font-family:var(--font-body);font-size:14.5px;color:var(--fog);line-height:1.5;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+.src-col ol li b{color:var(--paper-2);font-weight:500}
+
+/* === DECK CHROME (outside the stage) === */
+.deck-progress{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--sandstone),var(--himalaya-blue-2));width:0;z-index:1002;transition:width .35s var(--ease)}
+.deck-controls{display:flex;gap:14px;align-items:center;background:rgba(18,22,28,.85);border:1px solid var(--line);border-radius:999px;padding:10px 18px;backdrop-filter:blur(6px)}
+.deck-controls button{background:none;border:none;color:var(--paper-2);font-family:var(--font-mono);font-size:13px;cursor:pointer;padding:6px 10px;border-radius:6px}
+.deck-controls button:hover{background:rgba(255,255,255,.08)}
+.deck-controls .count{font-family:var(--font-mono);font-size:12.5px;color:var(--fog);letter-spacing:.12em}
+.hint{position:fixed;right:20px;top:16px;z-index:1000;font-family:var(--font-mono);font-size:11.5px;color:rgba(154,161,172,.7);letter-spacing:.08em}
+
+/* Speaker-notes overlay (press N) */
+.notes-overlay{position:fixed;inset:0;z-index:2000;background:rgba(8,10,13,.94);display:none;overflow:auto;padding:70px 110px}
+.notes-overlay.open{display:block}
+.notes-overlay h2{font-family:var(--font-display);font-size:34px;color:var(--paper);font-weight:560}
+.notes-overlay .who-tag{display:inline-block;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid var(--line);color:var(--fog);margin-bottom:18px}
+.notes-overlay .nbody{max-width:1050px;font-family:var(--font-body);font-size:19px;line-height:1.65;color:var(--paper-2);white-space:pre-line}
+.notes-overlay .nmeta{margin-top:26px;font-family:var(--font-mono);font-size:13.5px;color:var(--sandstone)}
+.notes-overlay .close-note{position:fixed;top:24px;right:30px;background:none;border:1px solid var(--line);color:var(--fog);font-family:var(--font-mono);font-size:13px;border-radius:8px;padding:8px 14px;cursor:pointer}
+
+/* Inline edit mode (press E) */
+.edit-toggle{position:fixed;top:16px;left:16px;z-index:10001;opacity:0;pointer-events:none;transition:opacity .3s ease;background:rgba(18,22,28,.9);border:1px solid var(--line);color:var(--paper-2);font-family:var(--font-mono);font-size:12.5px;border-radius:8px;padding:8px 13px;cursor:pointer}
+.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}
+.edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}
+body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline-offset:3px;border-radius:3px;cursor:text}
+</style>
+</head>
+<body>
+
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+
+<!-- ════════════════ SLIDE 1 — OPENING ════════════════ -->
+<section class="slide s-open" data-speaker="Om + Saloni"
+  data-notes="OM: Good morning everyone. Look at these two photographs for a moment. On the left — a canal, flowing quietly above a river, in the plains of Uttarakhand. On the right — a town perched almost two kilometres above sea level, where the mountains begin. Most people think Uttarakhand is only one story: hills, temples, tourism. But our state has two very different stories, told by two very different landscapes. Today we take you to two of its cities — and we'll show how each one answers the same question in its own way: how should people live with nature? SALONI: I'm Saloni, and I'll take you up to the mountains, to Joshimath. OM: And I'm Om Tayal, from the plains city of Roorkee. Let's begin the journey. | Extra context: hold this slide 2–3 seconds before speaking; let the images breathe. Point to each side as you name the cities. | Transition: “First — where exactly are we going?” → advance to the map. | Time: ~45s"
+  data-speaker-notes-time="0:45">
+  <div class="half l grain">
+    <img src="assets/solani_aqueduct_modern.jpg" alt="Aerial view of the Solani Aqueduct carrying the Upper Ganga Canal over the Solani river, Roorkee">
+    <div class="scrim"></div>
+    <div class="geo reveal d4">274 M · THE PLAINS<b>ROORKEE</b><span>Where people bent water to their will</span></div>
+  </div>
+  <div class="half r grain">
+    <img src="assets/auli_mountains.jpg" alt="Himalayan peaks above Joshimath, Uttarakhand">
+    <div class="scrim"></div>
+    <div class="geo reveal d5">1,890 M · THE HIMALAYA<b>JOSHIMATH</b><span>Where the mountains set the rules</span></div>
+  </div>
+  <div class="centerline"></div>
+  <div class="title-block">
+    <div class="kicker-c reveal">Uttarakhand · India · A Two-City Field Report</div>
+    <h1 class="reveal d1">TWO CITIES.<br>TWO STORIES<span class="amp">.</span></h1>
+    <div class="subtitle reveal d2">Exploring the heritage, culture and identity of Roorkee &amp; Joshimath</div>
+  </div>
+  <div class="presenters">
+    <div class="pchip reveal d3"><span class="dot"></span><b>Om Tayal</b><span>— Roorkee</span></div>
+    <div class="pchip j reveal d3"><span class="dot"></span><b>Saloni</b><span>— Joshimath</span></div>
+  </div>
+</section>
+
+<!-- ════════════════ SLIDE 2 — THE JOURNEY ════════════════ -->
+<section class="slide s-map" data-speaker="Om + Saloni"
+  data-notes="OM: Our journey climbs more than one and a half kilometres in under 250 kilometres of road. We start in Roorkee — 274 metres above sea level, on the Doab plain between the Ganga and the Yamuna, about 30 km from Haridwar. From there the road climbs through Haridwar and Rishikesh, then follows the Alaknanda river through the prayags — Devprayag, Rudraprayag, Karnaprayag — confluence points that are themselves sacred towns. SALONI: And at the end of that climb sits my town, Joshimath — 1,890 metres up, in Chamoli district. Beyond it: Badrinath at 3,300 metres, and Auli's ski slopes. Notice the elevation strip — the road isn't just a line on a map, it's a ladder between two worlds. | Extra context: trace the route with your hand as the line draws. Name the five prayags only if time allows. | Transition: “Before we climb, let's start in the plains — with a village that history almost forgot.” | Time: ~55s">
+  <div class="slide-inner">
+    <div class="kicker reveal">The Journey · Route &amp; Elevation</div>
+    <h2 class="slide-title reveal d1">From the <em>Gangetic Plain</em> to the High Himalaya</h2>
+    <div class="journey-grid">
+      <div class="map-wrap reveal d2">
+        <svg class="map-svg" viewBox="0 0 760 780" preserveAspectRatio="xMidYMid meet">
+          <!-- Stylized Uttarakhand landform -->
+          <path class="state-shape" d="M52,712 L336,712 L452,652 L612,486 L688,330 L714,238 L668,178 L604,166 L522,206 L438,244 L346,302 L246,404 L128,562 Z"/>
+          <!-- Ridge lines (Himalaya) -->
+          <path class="peak-line" d="M180,560 L260,470 L330,410 L420,330 L510,262 L600,208"/>
+          <path class="peak-line" d="M250,610 L340,520 L430,440 L520,370"/>
+          <!-- Rivers -->
+          <path d="M208,598 C240,560 260,540 292,508" fill="none" stroke="rgba(78,123,166,.5)" stroke-width="2.5"/>
+          <path d="M292,508 C330,468 356,432 388,394 C416,360 436,330 470,286" fill="none" stroke="rgba(78,123,166,.45)" stroke-width="2.5"/>
+          <!-- Route: Roorkee → Haridwar → Rishikesh → prayags → Joshimath → Badrinath → Auli -->
+          <path class="route-path" d="M148,668 C176,646 196,628 214,612 C236,592 258,566 288,506 C318,448 346,428 380,388 C410,352 428,326 448,296 C462,276 476,258 490,240"/>
+          <!-- Cities -->
+          <g class="city-pop" style="animation-delay:.8s">
+            <circle class="city" cx="148" cy="668" r="7"/>
+            <text class="city-label" x="98" y="700">ROORKEE</text><text class="city-sub" x="98" y="718">274 m · start</text>
+          </g>
+          <g class="city-pop" style="animation-delay:1.4s">
+            <circle class="city" cx="214" cy="612" r="5.5"/>
+            <text class="city-label" x="168" y="600" style="font-size:14.5px">HARIDWAR</text><text class="city-sub" x="168" y="617">the Ganga leaves the hills</text>
+          </g>
+          <g class="city-pop" style="animation-delay:2s">
+            <circle class="city" cx="288" cy="506" r="4.5"/>
+            <text class="city-sub" x="278" y="510" text-anchor="end">Rishikesh</text>
+          </g>
+          <g class="city-pop" style="animation-delay:2.6s">
+            <circle class="city" cx="380" cy="388" r="4"/>
+            <text class="city-sub" x="370" y="392" text-anchor="end">Karnaprayag</text>
+          </g>
+          <g class="city-pop" style="animation-delay:3s">
+            <circle class="city" cx="448" cy="296" r="7.5" style="fill:#4E7BA6"/>
+            <text class="city-label" x="320" y="262" style="font-size:17px;fill:#EDF2F5">JOSHIMATH</text><text class="city-sub" x="320" y="280">1,890 m · gateway</text>
+          </g>
+          <g class="city-pop" style="animation-delay:3.4s">
+            <circle class="city" cx="478" cy="322" r="5.5" style="fill:#D9822B"/>
+            <text class="city-sub" x="488" y="326">Badrinath · 3,300 m</text>
+          </g>
+          <g class="city-pop" style="animation-delay:3.6s">
+            <circle class="city" cx="492" cy="238" r="5" style="fill:#3E6B4F"/>
+            <text class="city-sub" x="500" y="234">Auli · 2,800 m</text>
+          </g>
+        </svg>
+      </div>
+      <div class="journey-side">
+        <ul class="leg-list">
+          <li class="leg reveal d2"><b>Roorkee → Haridwar</b> <span>— 30 km across the canal-fed Doab plain</span></li>
+          <li class="leg reveal d3"><b>Haridwar → Rishikesh → Devprayag</b> <span>— the road turns upward; rivers meet</span></li>
+          <li class="leg reveal d4"><b>Through the prayags</b> <span>— Rudraprayag, Karnaprayag, along the Alaknanda</span></li>
+          <li class="leg j reveal d5"><b>Joshimath</b> <span>— Saloni's home ground: 1,890 m, Chamoli district</span></li>
+          <li class="leg j reveal d6"><b>Beyond Joshimath</b> <span>— Badrinath, Auli, and the high valleys</span></li>
+        </ul>
+        <div class="elev-strip reveal d7">
+          <h4>Elevation profile of the route</h4>
+          <svg viewBox="0 0 640 110" style="width:100%;height:auto">
+            <polyline points="10,96 120,94 200,90 280,74 340,70 420,52 470,44 560,16" fill="none" stroke="rgba(200,150,90,.9)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="10" cy="96" r="4.5" fill="#C8965A"/><circle cx="470" cy="44" r="4.5" fill="#4E7BA6"/><circle cx="560" cy="16" r="4.5" fill="#D9822B"/>
+            <text x="10" y="86" style="font-family:'IBM Plex Mono';font-size:11.5px" fill="#9AA1AC">Roorkee 274 m</text>
+            <text x="300" y="30" style="font-family:'IBM Plex Mono';font-size:11.5px" fill="#9AA1AC">Joshimath 1,890 m</text>
+            <text x="512" y="14" style="font-family:'IBM Plex Mono';font-size:11.5px" fill="#9AA1AC">Badrinath ~3,300 m</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagechip">02 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 3 — ROORKEE: VILLAGE → ENGINEERING CITY ════════════════ -->
+<section class="slide s-rkt-history" data-speaker="Om"
+  data-notes="OM: Here is something almost nobody believes: one of India's great engineering cities began as a cluster of mud huts. Roorkee's name is old — the Mughal court's own administration record, the Ain-i-Akbari written for Emperor Akbar in the 1590s, already lists it as a pargana. In the 18th century it belonged to the Landhaura estate under Raja Ramdayal. But until the 1840s it was a quiet village — mud houses, fields, and one strategic detail: it sat exactly where any canal leaving the Ganga would have to pass. In 1842 that detail changed everything. The East India Company chose this spot as the headquarters of the Upper Ganga Canal works — the largest irrigation work attempted in India at the time. Within a decade, workshops, houses, a cantonment and a college had grown around it. The village didn't just grow — it was reborn as a company town for engineers. | Extra context: if asked, the name legends — Rurimadi Imran or “Ror ki” — are local traditions, not established history. | Transition: “And what the engineers built here was, frankly, audacious.” | Time: ~60s">
+  <div class="slide-inner">
+    <div class="kicker rkt reveal">Roorkee · Chapter One · Origins</div>
+    <h2 class="slide-title reveal d1">From a <em>Small Village</em> to an Engineering City</h2>
+    <div class="hero-strip reveal d2 grain">
+      <img src="assets/ganges_canal_roorkee_1860.jpg" alt="Watercolour view of the Ganges Canal at Roorkee, 1860, by William Simpson">
+      <div class="ph-caption">Roorkee &amp; the Ganges Canal, 1860 — watercolour by William Simpson (archival) · Wikimedia Commons, public domain</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-card reveal d3">
+        <div class="yr">1590s</div><h4>On the Mughal record</h4>
+        <p>Roorkee appears in the <b>Ain-i-Akbari</b>, the administrative gazetteer of Emperor Akbar's empire — already a recognised pargana.</p>
+        <span class="tag">Historical origins</span>
+      </div>
+      <div class="tl-card reveal d4">
+        <div class="yr">1700s</div><h4>The Landhaura estate</h4>
+        <p>For a time part of the Landhaura state under Raja Ramdayal — before control passed to the East India Company.</p>
+        <span class="tag">Regional rule</span>
+      </div>
+      <div class="tl-card reveal d5">
+        <div class="yr">1840s</div><h4>A village of mud huts</h4>
+        <p>Before 1840, Roorkee was still a small settlement — but it sat directly on the only practical canal line out of the Ganga at Haridwar.</p>
+        <span class="tag">Before the canal</span>
+      </div>
+      <div class="tl-card reveal d6">
+        <div class="yr">1842</div><h4>Headquarters of a giant</h4>
+        <p>Canal works begin under Colonel Cautley. Workshops, engineers' bungalows, a cantonment and a college grow around the site within a decade.</p>
+        <span class="tag">The canal era</span>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: Nagar Nigam Roorkee (nnroorkee.uk.gov.in); IIT Roorkee Institute History (iitr.ac.in)</div>
+  <div class="pagechip">03 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 4 — THE ENGINEERING MARVEL ════════════════ -->
+<section class="slide s-aqueduct" data-speaker="Om"
+  data-notes="OM: Here is the audacious part. A canal only works if its water keeps flowing downhill — very, very gently. The Upper Ganga Canal could not afford to dip down into the Solani river valley and climb back out; the water level had to be maintained. Cautley's answer: put the canal on a bridge and carry it across the sky. That is exactly what the Solani Aqueduct does — you can see it in this aerial photograph: two rivers, one blue, one brown, crossing each other at different levels. Water flowing over water. The canal bed sits roughly 25 metres above the river, and the aqueduct carries the channel for about half a kilometre. Watch the diagram: the canal water — in canal blue — slides slowly across the top, while the Solani — in Himalayan blue — keeps its own course underneath. Built in the 1840s–50s with brick, lime and human muscle — and it is still carrying water more than 170 years later. | Extra context: Cautley had no steam-powered heavy machinery here — this was pre-railway logistics for most of the work; the earth-moving railway came later during construction. The canal opened in 1854 and was, at the time, among the largest canal systems in the world. | Transition: “A project like this needs trained engineers. Where do you get them? You build a school.” | Time: ~70s">
+  <div class="slide-inner">
+    <div class="kicker rkt reveal">Roorkee · Chapter Two · The Engineering Marvel</div>
+    <h2 class="slide-title reveal d1">The Solani Aqueduct — <em>Water Flows Over Water</em></h2>
+    <div class="aq-grid">
+      <div class="aq-diagram reveal d2">
+        <svg class="aq-svg" viewBox="0 0 1000 650" preserveAspectRatio="xMidYMid meet">
+          <rect x="0" y="0" width="1000" height="650" fill="#1A2027"/>
+          <g transform="translate(0,45)">
+          <!-- banks -->
+          <path d="M0,120 L215,120 L235,560 L0,560 Z" fill="#242C37"/>
+          <path d="M1000,120 L785,120 L765,560 L1000,560 Z" fill="#242C37"/>
+          <path d="M215,120 L235,560 L215,560 Z" fill="#191E25"/>
+          <path d="M785,120 L765,560 L785,560 Z" fill="#191E25"/>
+          <!-- aqueduct channel structure -->
+          <rect x="0" y="118" width="1000" height="14" fill="#2E3641"/>
+          <rect x="0" y="132" width="1000" height="10" fill="#4A5462"/>
+          <!-- piers -->
+          <rect x="240" y="150" width="22" height="290" fill="#2E3641"/>
+          <rect x="480" y="150" width="22" height="290" fill="#2E3641"/>
+          <rect x="720" y="150" width="45" height="290" fill="#2E3641"/>
+          <!-- arches -->
+          <path d="M262,420 A 109 109 0 0 1 480,420" fill="none" stroke="#3A4450" stroke-width="16"/>
+          <path d="M502,420 A 109 109 0 0 1 720,420" fill="none" stroke="#3A4450" stroke-width="16"/>
+          <!-- river bed -->
+          <path d="M235,470 C360,448 420,502 500,492 C590,480 660,452 765,468 L765,560 L235,560 Z" fill="rgba(78,123,166,.16)"/>
+          <!-- animated river -->
+          <g class="anim-river"><path class="river" d="M235,468 C360,446 420,500 500,490 C590,478 660,450 765,466"/></g>
+          <!-- animated canal water -->
+          <g class="anim-water"><path class="water" d="M-40,136 L1040,136"/></g>
+          <!-- labels -->
+          <text class="aq-label" x="30" y="86">UPPER GANGA CANAL — Eastbound, holding its level</text>
+          <text class="aq-label dim" x="30" y="192">canal bed ≈ 25 m above the river</text>
+          <text class="aq-label" x="330" y="540">SOLANI RIVER — keeps its own course underneath</text>
+          <text class="aq-label dim" x="640" y="330">water flows over water, 1854</text>
+          <!-- level dashed guide -->
+          <path d="M0,136 L1000,136" stroke="rgba(200,150,90,.35)" stroke-width="1.4" stroke-dasharray="6 6"/>
+          <path d="M251,150 L251,440 M491,150 L491,440 M731,150 L731,440" stroke="rgba(154,161,172,.3)" stroke-width="1.2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="aq-facts">
+        <div class="fact-row reveal d3"><div class="num">1854</div><p>Canal opened after 12 years of construction — one of the largest canal systems on Earth at the time.</p></div>
+        <div class="fact-row reveal d4"><div class="num">≈ 25 m</div><p>Canal bed held high above the Solani so the water never loses its gentle downhill slope.</p></div>
+        <div class="fact-row reveal d5"><div class="num">~0.5 km</div><p>Length of the water-crossing — an elevated channel on piers and arches, built of brick &amp; lime mortar.</p></div>
+        <div class="fact-row reveal d6"><div class="num">170+ <small>yrs</small></div><p>Still carrying canal water across the river today — working infrastructure, not a ruin.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: Institution of Civil Engineers (ice.org.uk, “The Ganges Canal”); Ganges Canal records</div>
+  <div class="pagechip">04 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 5 — ENGINEERING LEGACY ════════════════ -->
+<section class="slide s-legacy" data-speaker="Om"
+  data-notes="OM: Build a giant canal, and you must train engineers to build and maintain it. So in 1847, right beside the works, Roorkee College opened its doors — and in 1854 it was renamed Thomason College of Civil Engineering, after Lieutenant-Governor James Thomason. And here's my favourite footnote: on 22 December 1851, the world's famous 'Jenny' locomotive hauled earth for the canal along a temporary construction railway between Roorkee and Piran Kaliyar — India's first steam freight run, two years before Bombay's first passenger train. Roorkee is also home to the Bengal Sappers — the Bengal Engineer Group — which made the town its home in the 1850s; Roorkee cantonment is counted among India's oldest. The college kept growing: in 1949 it became the University of Roorkee — India's first engineering university — and in 2001 it was elevated to IIT Roorkee. One institution, over 175 years old, born directly from the canal. | Extra context: the locomotive's name appears in sources as 'Jenny Lind' (after the Swedish opera singer) or simply 'Thomason'; the key verified fact is the December 1851 freight run. The Sappers later played a major role in projects across British India. | Transition: “Engineering is only half of Roorkee's identity — the other half is how people actually live beside the water.” | Time: ~65s">
+  <div class="slide-inner">
+    <div class="kicker rkt reveal">Roorkee · Chapter Three · The Legacy</div>
+    <h2 class="slide-title reveal d1">The <em>Canal Built a College</em> — and a Nation's Engineers</h2>
+    <div class="legacy-grid">
+      <ul class="vtimeline">
+        <li class="vt reveal-l d2"><div class="yr">22 Dec 1851</div><h4>India's first steam freight run</h4><p>A 'Jenny' locomotive hauls earth along a temporary construction railway from Roorkee to Piran Kaliyar — two years before India's first passenger train.</p></li>
+        <li class="vt reveal-l d3"><div class="yr">1847 → 1854</div><h4>Roorkee College → Thomason College</h4><p>Founded beside the canal works to train engineers; renamed for James Thomason, the Lieutenant-Governor behind the canal.</p></li>
+        <li class="vt reveal-l d4"><div class="yr">1850s</div><h4>The Bengal Sappers arrive</h4><p>The Bengal Engineer Group makes Roorkee its home — one of India's oldest cantonments, a military-engineering twin of the college.</p></li>
+        <li class="vt reveal-l d5"><div class="yr">1949</div><h4>University of Roorkee</h4><p>The Thomason College becomes independent India's first engineering university.</p></li>
+        <li class="vt reveal-l d6"><div class="yr">2001</div><h4>IIT Roorkee</h4><p>Elevated to India's seventh Indian Institute of Technology — the oldest engineering institution in the country, still growing.</p></li>
+      </ul>
+      <div class="legacy-photos">
+        <div class="photo-frame reveal-r d3 grain"><img src="assets/iit_roorkee_admin.jpg" alt="Main Administrative Building, IIT Roorkee"><div class="ph-caption">Main Administrative Building, IIT Roorkee · photo: Kanishk.iitr / Wikimedia Commons, CC BY-SA 3.0</div></div>
+        <div class="photo-frame reveal-r d5 grain"><img src="assets/head_ganges_canal_1890s.jpg" alt="Head of the Ganges Canal at Haridwar, 1890s photograph by Samuel Bourne"><div class="ph-caption">Head of the Ganges Canal, Haridwar, 1890s — Samuel Bourne (archival) · public domain</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: IIT Roorkee — Institute History &amp; Heritage (iitr.ac.in); Indian Railways historical records</div>
+  <div class="pagechip">05 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 6 — CULTURE & PLACES AROUND ROORKEE ════════════════ -->
+<section class="slide s-places" data-speaker="Om"
+  data-notes="OM: If you visit Roorkee today, three places will tell you what the town really is. First — Piran Kaliyar Sharif, about 25 km away: the dargah of the 13th-century Sufi saint Alauddin Ali Ahmed Sabir, known as Sabir Kaliyari. People of every faith come here — it's one of the oldest living symbols of Hindu–Muslim shared worship in the region. Second — Haridwar, just 30 km away: every evening at Har Ki Pauri, the Ganga aarti — fire, bells, and a river worshipped as a goddess. Roorkee's own canal is born from that same river at Haridwar's headworks. Third — the canal itself: in Roorkee you don't go to see water, you live with it — it's the town's promenade, its cooling system, its identity. The plains around it feed on canal irrigation — sugarcane and wheat country. And culturally? An engineering-and-education town with a cantonment heartbeat — you can feel it in the fest season, when IIT Roorkee's Cognizance, one of Asia's largest technical fests, takes over the town. | Extra context: local kitchens are classic western-Doab north-Indian — kachori–sabzi breakfasts, sweets like rabri and jalebi. Keep this as spoken colour, not a slide claim. | Transition: “From the plains, let's climb to where the mountains begin — Saloni takes over.” | Time: ~60s">
+  <div class="slide-inner">
+    <div class="kicker rkt reveal">Roorkee · Chapter Four · Culture &amp; Places Around</div>
+    <h2 class="slide-title reveal d1">Faith, River and <em>Everyday Water</em></h2>
+    <div class="place-grid">
+      <div class="place-card reveal d2">
+        <div class="ph"><img src="assets/piran_kaliyar_shareef.jpg" alt="Piran Kaliyar Sharif dargah near Roorkee"><div class="ph-caption">Dargah of Sabir Kaliyari · Wikimedia Commons, CC BY-SA 4.0</div></div>
+        <div class="pc-body">
+          <h4>Piran Kaliyar Sharif</h4><div class="dist">~25 km · dargah of Hazrat Sabir</div>
+          <p>Shrine of the 13th-century Sufi saint Alauddin Ali Ahmed Sabir. Devotees of all faiths visit — a living example of shared worship in the Doab.</p>
+        </div>
+      </div>
+      <div class="place-card reveal d3">
+        <div class="ph"><img src="assets/har_ki_pauri_aarti.jpg" alt="Evening Ganga aarti at Har Ki Pauri, Haridwar"><div class="ph-caption">Har Ki Pauri, Haridwar — evening aarti · CC BY 2.0, Wikimedia Commons</div></div>
+        <div class="pc-body">
+          <h4>Haridwar — Har Ki Pauri</h4><div class="dist">~30 km · where the Ganga meets the plain</div>
+          <p>Every evening, the Ganga aarti fills the ghats with flame and bells. The Upper Ganga Canal draws its very water from this river, upstream at Haridwar.</p>
+        </div>
+      </div>
+      <div class="place-card reveal d4">
+        <div class="ph"><img src="assets/ganges_canal_roorkee_2008.jpg" alt="A canal bridge on the Upper Ganga Canal at Roorkee"><div class="ph-caption">Upper Ganga Canal at Roorkee · CC BY-SA 3.0, Wikimedia Commons</div></div>
+        <div class="pc-body">
+          <h4>The Canal as Daily Life</h4><div class="dist">In town · the town's own promenade</div>
+          <p>Irrigation for the plains, water for the fields, an evening walk for the town — plus an engineering-campus culture and the Cognizance tech fest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: Nagar Nigam Roorkee; Uttarakhand Tourism (uptourism.gov.in)</div>
+  <div class="pagechip">06 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 7 — JOSHIMATH: GATEWAY TO THE HIMALAYAS ════════════════ -->
+<section class="slide s-gateway" data-speaker="Saloni"
+  data-notes="SALONI: Thank you, Om — and now, welcome to my town. After Om's flat plains, feel the air thin: Joshimath sits at about 1,890 metres — nearly six times the elevation of Roorkee — in Chamoli district, built on a spur above the Alaknanda valley. Geography here is destiny. Just downstream, at Vishnuprayag, the Dhauliganga river merges with the Alaknanda — a confluence you can watch from the road. Everything about Joshimath is a gateway: it is the last major town on the highway to Badrinath, the base for Auli's ski slopes, and the roadhead for treks to the Valley of Flowers and Hemkund Sahib. In winter, when snow seals the high passes, Joshimath is where mountain life retires to — and it stays busy all year, not just in pilgrimage season. | Extra context: Rishikesh is roughly 250 km away by road; Joshimath's population is small (tens of thousands) but it swells enormously during the Char Dham season. Mention that the town literally cannot expand outward — it's bounded by steep slopes. | Transition: “But Joshimath is not only a gateway — it is one of the holiest addresses in the Himalaya.” | Time: ~55s">
+  <div class="full-bleed grain"><img src="assets/joshimath_evening_peaks.jpg" alt="Evening alpenglow on snowy peaks above Joshimath town"><div class="veil"></div></div>
+  <div class="content">
+    <div class="kicker josh reveal" style="color:#8FB2D4">Joshimath · Chapter One · The Gateway</div>
+    <h2 class="slide-title reveal d1" style="color:#F2F6FA">Gateway to the <em>Himalayas</em></h2>
+    <p class="slide-sub reveal d2" style="color:rgba(237,242,245,.85);max-width:820px">Chamoli district · a town on a spur above the Alaknanda, where the roads to Badrinath, Auli and the high valleys all begin.</p>
+    <div class="stat-row">
+      <div class="stat-chip reveal d3"><div class="v">1,890 <small>m</small></div><div class="k">Elevation — ~6× Roorkee</div></div>
+      <div class="stat-chip reveal d4"><div class="v">10 km</div><div class="k">to Vishnuprayag — Alaknanda + Dhauliganga</div></div>
+      <div class="stat-chip reveal d5"><div class="v">~250 km</div><div class="k">from Rishikesh by mountain road</div></div>
+      <div class="stat-chip reveal d6"><div class="v">3+</div><div class="k">gateway roles: pilgrimage · ski · trekking</div></div>
+    </div>
+  </div>
+  <div class="src" style="z-index:2">Photo: Golden evening light above Joshimath · Wikimedia Commons, CC BY-SA 4.0</div>
+  <div class="pagechip" style="z-index:2">07 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 8 — ANCIENT HERITAGE & SPIRITUAL IDENTITY ════════════════ -->
+<section class="slide s-heritage" data-speaker="Saloni"
+  data-notes="SALONI: Joshimath's older name is Jyotirmath — 'the monastery of light'. In the 8th century, the philosopher Adi Shankaracharya is credited with founding four cardinal monasteries in the four corners of India — Sringeri in the south, Puri in the east, Dwarka in the west, and Jyotirmath here in the north. Joshimath is the northern one. The Narsingh Temple, dedicated to Lord Vishnu's man-lion form, is the town's spiritual heart — and here is the detail I love most: every winter, when snow closes the Badrinath temple, the idol of Lord Badri is brought down and enthroned at Narsingh Temple. For roughly six months, Joshimath *is* Badrinath's seat. The town also holds the Kalpavriksha — an ancient tree said to be over a thousand years old, linked by tradition to Shankaracharya himself. Around all of this lives Garhwali culture — the language, the mountain villages, a rhythm of life shaped by pilgrimage seasons. | Extra context: temple-age figures (~1,200 years for the idol/tree) are traditional claims, not archaeologically fixed dates — phrase them as 'according to tradition'. Winter transfer of the idol happens around Diwali (Nov) and the deity returns to Badrinath in spring (Apr/May). | Transition: “And from this one town, an entire Himalayan universe opens up.” | Time: ~60s">
+  <div class="slide-inner">
+    <div class="kicker josh reveal">Joshimath · Chapter Two · Ancient Heritage</div>
+    <h2 class="slide-title josh reveal d1">Jyotirmath — the <em>Monastery of Light</em></h2>
+    <div class="her-grid">
+      <div class="her-photos">
+        <div class="photo-frame reveal-l d2 grain"><img src="assets/narsingh_temple.jpg" alt="Narsingh Temple, Joshimath"><div class="ph-caption">Narsingh Temple, Joshimath · photo: Rohit Sharma / Wikimedia Commons, CC BY-SA 4.0</div></div>
+        <div class="photo-frame reveal-l d4 grain"><img src="assets/joshimath_1890s.jpg" alt="Historic photograph of Joshimath town in the 1890s"><div class="ph-caption">Joshimath in the 1890s — Kurt Boeck (archival) · public domain</div></div>
+      </div>
+      <div class="her-points">
+        <div class="her-point reveal-r d2"><div class="ic">8th century</div><div><h4>One of Shankaracharya's four mathas</h4><p>Adi Shankaracharya is credited with establishing four cardinal monasteries; Jyotirmath is the northern seat.</p></div></div>
+        <div class="her-point reveal-r d3"><div class="ic">Narsingh Temple</div><div><h4>The town's spiritual heart</h4><p>Dedicated to Lord Narsingh, Vishnu's man-lion form — home to an idol that tradition traces back centuries.</p></div></div>
+        <div class="her-point reveal-r d4"><div class="ic">Every winter</div><div><h4>Badrinath's winter seat</h4><p>When snow closes Badrinath (~Nov), the idol of Lord Badri is enthroned here; worship continues until the shrine reopens in spring.</p></div></div>
+        <div class="her-point reveal-r d5"><div class="ic">Living culture</div><div><h4>Garhwali life &amp; the Kalpavriksha</h4><p>Garhwali language, pilgrimage-season rhythms, and an ancient tree — the Kalpavriksha — linked to Shankaracharya by tradition.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: Uttarakhand Tourism; Shri Badrinath–Kedarnath Temple Committee (badrinath-kedarnath.gov.in)</div>
+  <div class="pagechip">08 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 9 — BEYOND JOSHIMATH ════════════════ -->
+<section class="slide s-beyond" data-speaker="Saloni"
+  data-notes="SALONI: Joshimath is the doorway, and here's what lies beyond — but note the distances and seasons, because the Himalaya doesn't do 'nearby' the way plains do. Auli is genuinely close — about 14 km by road, or better: ride the ropeway. It's one of India's highest ski resorts, with meadows called bugyals and views of Nanda Devi. Vishnuprayag is just 10 km downstream — the river confluence. Badrinath, one of the four Char Dham shrines, is about 45 km — and it's seasonal: the temple opens roughly late April to early November. For the Valley of Flowers — a UNESCO World Heritage Site — you drive to Govindghat, about 20 km, then trek roughly 17 km to the valley; it's a July–September experience. Hemkund Sahib, the high-altitude Sikh shrine at ~4,630 m, shares the same trail up to Ghangaria and then climbs higher — also open only in summer. And Tapovan, across the river, offers hot springs and meadows. Same valley, very different calendars. | Extra context: ropeway is the Joshimath–Auli passenger ropeway. Distances are approximate road distances; trek distances are one-way. If asked about Nanda Devi National Park, it adjoins the Valley of Flowers. | Transition: “But in January 2023, my town made global news for a reason no one wanted.” | Time: ~65s">
+  <div class="slide-inner">
+    <div class="kicker josh reveal">Joshimath · Chapter Three · Beyond the Town</div>
+    <h2 class="slide-title josh reveal d1">One Valley, <em>Many Journeys</em></h2>
+    <div class="dest-grid">
+      <div class="dest-map reveal d2">
+        <svg viewBox="0 0 760 770" preserveAspectRatio="xMidYMid meet">
+          <!-- stylized valley: ridge lines -->
+          <path d="M40,700 C160,640 240,560 330,470 C420,380 520,320 700,270" fill="none" stroke="rgba(154,161,172,.35)" stroke-width="1.8"/>
+          <path d="M60,740 C200,690 300,620 400,540 C500,460 600,410 740,380" fill="none" stroke="rgba(154,161,172,.22)" stroke-width="1.8"/>
+          <path d="M100,180 C220,240 320,330 420,420 C500,490 600,540 720,580" fill="none" stroke="rgba(154,161,172,.28)" stroke-width="1.8"/>
+          <!-- Alaknanda river -->
+          <path d="M420,740 C430,650 460,570 470,470 C480,380 500,300 540,220" fill="none" stroke="rgba(78,123,166,.6)" stroke-width="5" stroke-linecap="round"/>
+          <!-- road along valley -->
+          <path class="route-path" style="stroke:#4E7BA6;stroke-dasharray:3 8;stroke-dashoffset:0;opacity:.8" d="M470,700 C470,600 480,520 480,470 C488,390 505,310 530,240"/>
+          <!-- trek lines (dotted) -->
+          <path d="M505,268 C540,200 590,150 630,112" fill="none" stroke="rgba(217,130,43,.65)" stroke-width="2.4" stroke-dasharray="2 7"/>
+          <path d="M512,262 C570,246 640,236 692,231" fill="none" stroke="rgba(217,130,43,.65)" stroke-width="2.4" stroke-dasharray="2 7"/>
+          <!-- Nodes: 1 Joshimath (home), 2 Vishnuprayag, 3 Tapovan, 4 Auli, 5 Badrinath, 6 Govindghat(+trek to VoF & Hemkund) -->
+          <g class="city-pop" style="animation-delay:.6s"><circle class="dest-node" cx="480" cy="470" r="17" style="fill:#4E7BA6;stroke:#EDF2F5"/><text class="dest-num" x="474" y="475" style="fill:#fff">1</text><text class="dest-name" x="410" y="452" style="font-size:15.5px">JOSHIMATH · 1,890 m</text></g>
+          <g class="city-pop" style="animation-delay:.9s"><circle class="dest-node" cx="480" cy="700" r="14"/><text class="dest-num" x="475" y="705">2</text><text class="dest-name" x="346" y="736">2 · VISHNUPRAYAG</text></g>
+          <g class="city-pop" style="animation-delay:1.2s"><circle class="dest-node" cx="452" cy="548" r="14"/><text class="dest-num" x="447" y="553">3</text><text class="dest-name" x="330" y="566">3 · TAPOVAN</text></g>
+          <g class="city-pop" style="animation-delay:1.5s"><circle class="dest-node" cx="430" cy="360" r="14" style="fill:#3E6B4F"/><text class="dest-num" x="425" y="365" style="fill:#fff">4</text><text class="dest-name" x="300" y="344">4 · AULI · 2,800 m</text></g>
+          <g class="city-pop" style="animation-delay:1.8s"><circle class="dest-node" cx="540" cy="220" r="14" style="fill:#D9822B"/><text class="dest-num" x="535" y="225" style="fill:#fff">5</text><text class="dest-name" x="520" y="194" text-anchor="end">5 · BADRINATH · 3,300 m</text></g>
+          <g class="city-pop" style="animation-delay:2.1s"><circle class="dest-node" cx="505" cy="272" r="14"/><text class="dest-num" x="500" y="277">6</text><text class="dest-name" x="338" y="278">6 · GOVINDGHAT</text></g>
+          <g class="city-pop" style="animation-delay:2.4s"><circle class="dest-node" cx="630" cy="110" r="14" style="fill:#7A4E9E"/><text class="dest-num" x="625" y="115" style="fill:#fff">7</text><text class="dest-name" x="610" y="98" style="font-size:12.5px" text-anchor="end">HEMKUND SAHIB</text><text class="dest-name" x="610" y="116" style="font-size:12.5px" text-anchor="end">~4,630 m · trek</text></g>
+          <g class="city-pop" style="animation-delay:2.7s"><circle class="dest-node" cx="690" cy="230" r="14" style="fill:#3E6B4F"/><text class="dest-num" x="685" y="235" style="fill:#fff">8</text><text class="dest-name" x="670" y="268" style="font-size:12.5px" text-anchor="end">VALLEY OF FLOWERS</text><text class="dest-name" x="670" y="286" style="font-size:12.5px" text-anchor="end">UNESCO · trek</text></g>
+          <text class="city-sub" x="50" y="96" style="font-size:12.5px">dotted lines = trekking routes · stylized, not to scale</text>
+        </svg>
+      </div>
+      <div class="dest-cards">
+        <div class="dest-card reveal d2"><img src="assets/auli_mountains.jpg" alt="Mountain panorama above Auli"><div class="d-body"><h5>Auli</h5><div class="km">~14 km · road / ropeway</div><p>Ski slopes &amp; alpine meadows (bugyals); views of Nanda Devi. Winter–spring for snow.</p></div></div>
+        <div class="dest-card reveal d3"><img src="assets/badrinath_temple.jpg" alt="Badrinath Temple with Himalayan backdrop"><div class="d-body"><h5>Badrinath</h5><div class="km">~45 km · Char Dham</div><p>One of Hinduism's four Char Dham sites. Open roughly late April – early November.</p></div></div>
+        <div class="dest-card reveal d4"><img src="assets/valley_of_flowers.jpg" alt="Valley of Flowers National Park in bloom"><div class="d-body"><h5>Valley of Flowers</h5><div class="km">20 km + ~17 km trek</div><p>UNESCO World Heritage Site of alpine flora — drive to Govindghat, then trek. July–September.</p></div></div>
+        <div class="dest-card reveal d5"><img src="assets/hemkund_sahib_reflection.jpg" alt="Hemkund Sahib gurdwara reflected in the glacial lake"><div class="d-body"><h5>Hemkund Sahib</h5><div class="km">trek via Ghangaria</div><p>Sikh shrine at ~4,630 m beside a glacial lake; shares the Valley of Flowers trail. Summer only.</p></div></div>
+        <div class="dest-card reveal d6"><img src="assets/vishnuprayag.jpg" alt="Alaknanda river gorge at Vishnuprayag"><div class="d-body"><h5>Vishnuprayag</h5><div class="km">~10 km · river confluence</div><p>The Dhauliganga meets the Alaknanda — first of the great confluences beyond the town.</p></div></div>
+        <div class="dest-card reveal d7"><img src="assets/auli_snow.jpg" alt="Snow-covered slopes near Auli"><div class="d-body"><h5>Tapovan</h5><div class="km">~15 km · across the river</div><p>Meadows and hot springs reached over the Dhauliganga — a quiet counterpoint to the pilgrim trail.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Distances approximate (road; treks one-way). Sources: Uttarakhand Tourism · UNESCO whc.unesco.org</div>
+  <div class="pagechip">09 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 10 — LAND SUBSIDENCE ════════════════ -->
+<section class="slide s-subs" data-speaker="Saloni"
+  data-notes="SALONI: I want to present this carefully, because real families live this story. Joshimath is built on an old landslide — loose debris sitting on a steep, fractured rock slope. That was known for decades: in 1976, the Mishra Committee warned that the town sat on unstable material and recommended better drainage and restrictions on heavy construction. Those warnings went largely unheeded. In satellite data, the town sank about 8.9 cm between April and November 2022 — then about 5.4 cm in just twelve days around New Year 2023. In January 2023, cracks spread through hundreds of buildings — official surveys recorded around 868 houses damaged — and many families had to leave their homes. What caused it? The geology and poor drainage and unplanned construction are not controversial. What IS disputed is the role of the 520 MW Tapovan-Vishnugad hydropower project: several government-appointed studies did not blame it, while many residents and some independent experts disagree — and the project has repeatedly been hit by water seepage; tunnelling was halted again in August 2026 after a cavity opened in the main tunnel. The state responded with a ₹1,658-crore recovery plan based on 'Build Back Better'. The lesson isn't 'stop development' — it's that the Himalaya has a carrying capacity, and planning must respect it. | Extra context: be measured in tone — no disaster imagery; acknowledge displaced families. Distinguish clearly: (1) established: geology, drainage, construction on slopes; (2) disputed: hydropower project's contribution. Recovery plan approved 2023; implementation has been slow and is ongoing. | Transition: “So — one city asked nature to move; the other is being reminded that nature doesn't move. Let's put them side by side.” | Time: ~75s">
+  <div class="slide-inner">
+    <div class="kicker josh reveal" style="color:#D9822B">Joshimath · Chapter Four · When the Mountains Send a Warning</div>
+    <h2 class="slide-title reveal d1">A Town on an <em>Old Landslide</em></h2>
+    <div class="sub-grid">
+      <div class="sub-diagram reveal d2">
+        <svg viewBox="0 -60 900 700" preserveAspectRatio="xMidYMid meet">
+          <rect x="0" y="-60" width="900" height="700" fill="#1A2027"/>
+          <path d="M0,150 L140,84 L300,140 L470,66 L650,128 L900,44 L900,-60 L0,-60 Z" fill="rgba(78,123,166,.10)"/>
+          <path d="M0,205 L180,150 L360,192 L560,128 L760,172 L900,118 L900,-60 L0,-60 Z" fill="rgba(154,161,172,.07)"/>
+          <!-- bedrock slope -->
+          <path d="M0,300 L900,90 L900,580 L0,580 Z" fill="#39414D"/>
+          <path d="M0,300 L900,90" stroke="#4A5462" stroke-width="3" fill="none"/>
+          <!-- overburden (old landslide debris) -->
+          <path d="M0,300 L900,90 L900,150 C700,200 400,330 200,410 C120,440 40,470 0,470 Z" fill="#6E5C42" opacity=".9"/>
+          <path d="M0,300 L900,90 L900,150 C700,200 400,330 200,410 C120,440 40,470 0,470 Z" fill="url(#hatch)" opacity=".25"/>
+          <defs><pattern id="hatch" width="14" height="14" patternTransform="rotate(35)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="14" stroke="#20180E" stroke-width="2"/></pattern></defs>
+          <!-- houses on surface -->
+          <g fill="#EAE2D3">
+            <path d="M140,398 l26,-16 26,16 -4,26 -44,0 Z"/><rect x="156" y="424" width="20" height="18"/>
+            <path d="M330,330 l26,-16 26,16 -4,26 -44,0 Z" transform="rotate(7 356 340)"/><rect x="344" y="358" width="20" height="18" transform="rotate(7 354 367)"/>
+            <path d="M560,240 l26,-16 26,16 -4,26 -44,0 Z"/><rect x="576" y="266" width="20" height="18"/>
+          </g>
+          <!-- surface cracks -->
+          <path class="crack" d="M100,452 l30,-10 14,16 26,-14 18,12" stroke="#E06A4A" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+          <path class="crack" d="M420,338 l26,-8 12,12 22,-12" stroke="#E06A4A" stroke-width="3" fill="none" stroke-linecap="round" style="animation-delay:1.4s"/>
+          <path class="crack" d="M640,232 l24,-6 10,10 20,-10" stroke="#E06A4A" stroke-width="3" fill="none" stroke-linecap="round" style="animation-delay:1.8s"/>
+          <!-- seepage arrows -->
+          <g class="seep" stroke="#4E7BA6" stroke-width="3.5" fill="none" stroke-linecap="round">
+            <path d="M180,388 l0,34"/><path d="M172,414 l8,10 8,-10"/>
+            <path d="M380,306 l0,34"/><path d="M372,332 l8,10 8,-10"/>
+            <path d="M600,212 l0,34"/><path d="M592,238 l8,10 8,-10"/>
+          </g>
+          <!-- creep direction arrow -->
+          <g class="seep" stroke="#C8965A" stroke-width="3.5" fill="none" stroke-linecap="round" style="animation-delay:.6s">
+            <path d="M260,430 l90,-32"/><path d="M340,398 l14,-2 -4,14"/>
+          </g>
+          <!-- labels -->
+          <text class="sub-layer" x="34" y="540" style="fill:#B9C1CC">fractured bedrock — steep, hard slope</text>
+          <text class="sub-layer" x="470" y="120" style="fill:#D8C39A">old landslide debris — loose overburden</text>
+          <text class="sub-label" x="60" y="238">rain &amp; wastewater seep in → debris loses cohesion</text>
+          <text class="sub-label" x="500" y="452">slow creep downslope → ground cracks (Jan 2023)</text>
+        </svg>
+      </div>
+      <div class="sub-steps">
+        <div class="sub-step reveal d3"><div class="hd"><div class="yr">1976</div><h4>Mishra Committee warns</h4></div><p>First official alarm: Joshimath stands on old landslide debris; recommends drainage control and limits on heavy construction. Warnings go largely unheeded.</p></div>
+        <div class="sub-step reveal d4"><div class="hd"><div class="yr">2022</div><h4>Satellites measure the sinking</h4></div><p>ISRO/NRSC data: ~8.9 cm of subsidence Apr–Nov 2022, then ~5.4 cm in 12 days around New Year 2022–23.</p></div>
+        <div class="sub-step reveal d5"><div class="hd"><div class="yr">2023</div><h4>January crisis</h4></div><p>Cracks spread through homes and roads — official surveys record ~868 damaged houses; families relocate as zones are declared.</p></div>
+        <div class="sub-step reveal d6"><div class="hd"><div class="yr">2023+</div><h4>Response — ₹1,658 crore</h4></div><p>Centre approves a recovery plan on 'Build Back Better' principles; rehabilitation continues, and residents await permanent solutions.</p></div>
+        <div class="sub-step reveal d7"><div class="hd"><div class="yr">2026</div><h4>The debate continues</h4></div><p>Aug 2026: tunnelling at the 520 MW Tapovan-Vishnugad project halts again after a cavity and water seepage (PTI).</p></div>
+        <div class="verdict reveal d8"><b>Established:</b> fragile geology + poor drainage + unplanned construction. <b>Disputed:</b> the hydropower project's role — government studies did not blame it; many residents and some experts disagree.</div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Sources: Mishra Committee (1976); ISRO/NRSC; NDMA (2023); Wadia Institute; PTI (Aug 2026); Sci. Reports &amp; GRL 2024</div>
+  <div class="pagechip">10 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 11 — TWO CITIES, TWO RELATIONSHIPS WITH NATURE ════════════════ -->
+<section class="slide s-compare" data-speaker="Om + Saloni"
+  data-notes="OM: Let's put our two cities side by side, because they are almost mirror images. In Roorkee, people decided water should serve them — so they canalised the Ganga, hung a canal above a river, and built institutions on top of that engineering: irrigation, agriculture, a college, a cantonment, a university. Nature as something to be harnessed — with skill, and with consequences that took decades to understand. SALONI: And in Joshimath, people accepted that the mountain sets the rules — faith on a fragile slope, a tourist economy that arrives on nature's calendar, and now a subsidence crisis that is really nature reminding everyone of limits engineers can't draw on a map. TOGETHER: One city moved a river; the other must move carefully. The shared lesson: development and nature must coexist — whether you engineer a river or worship a mountain. Neither city is the 'wrong' model — they are two halves of the same state's experience. | Extra context: hand the slide over naturally — Om takes the left column, Saloni the right; both deliver the closing lesson line together if comfortable. | Transition: “So finally — let us each answer one simple question, personally.” | Time: ~60s">
+  <div class="slide-inner">
+    <div class="kicker reveal">The Comparison · One State, Two Philosophies</div>
+    <h2 class="slide-title reveal d1">Two Cities, Two <em>Relationships with Nature</em></h2>
+    <div class="cmp-grid">
+      <div class="cmp-col rkt reveal-l d2">
+        <h3>Roorkee</h3><div class="sub">Nature harnessed · the plains</div>
+        <ul class="cmp-items">
+          <li><b>Engineered the water</b> — canalised the Ganga; canal opened 1854</li>
+          <li><b>Water above water</b> — the Solani Aqueduct, still working today</li>
+          <li><b>Irrigation first</b> — food security for millions across the Doab</li>
+          <li><b>Institutions from infrastructure</b> — canal → college → IIT</li>
+        </ul>
+        <div class="cmp-img"><img src="assets/solani_aqueduct_modern.jpg" alt="Solani Aqueduct aerial view"></div>
+      </div>
+      <div class="cmp-mid reveal d3"><div class="vs">vs</div></div>
+      <div class="cmp-col josh reveal-r d2">
+        <h3>Joshimath</h3><div class="sub">Nature respected · the Himalaya</div>
+        <ul class="cmp-items">
+          <li><b>Faith on a fragile slope</b> — 8th-century matha at 1,890 m</li>
+          <li><b>Nature's calendar</b> — winter seat of Badrinath; seasonal tourism</li>
+          <li><b>Fragile geology</b> — a town on old landslide debris</li>
+          <li><b>The warning</b> — subsidence shows development has limits</li>
+        </ul>
+        <div class="cmp-img"><img src="assets/joshimath_town_panorama.jpg" alt="Joshimath town on a mountain slope"></div>
+      </div>
+    </div>
+    <div class="cmp-lesson reveal d5">Development and nature must <b>coexist</b> — whether you engineer a river or worship a mountain.</div>
+  </div>
+  <div class="pagechip">11 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 12 — WHAT MAKES OUR CITIES SPECIAL ════════════════ -->
+<section class="slide s-personal" data-speaker="Om + Saloni"
+  data-notes="OM (reads his card, then speaks freely): What makes my city special is that it answers a question other cities ask consultants — 'where does your water come from?' — with its whole identity. In Roorkee, the water taught people engineering. I've walked along the canal in the evening — it's the town's living room. (Students may add one authentic personal line of their own here.) SALONI (reads hers): For me, Joshimath is special because it lives above the clouds — but always on the mountain's terms. When I think of it, I think of the winter evening when Badrinath's idol arrives, and the whole town's calendar changes. (Students may add one authentic personal line of their own here.) BOTH (together): Plains or peaks — our cities are both stories of Uttarakhand: people who made a life between the river and the sky. | Extra context: the card lines are written to be authentic and adaptable — neither student should claim invented memories; add one real detail from your own experience if you have one. | Transition: “And that brings us to the end of our journey.” | Time: ~55s">
+  <div class="slide-inner">
+    <div class="kicker reveal">Personal · In Our Own Words</div>
+    <h2 class="slide-title reveal d1">What Makes <em>Our Cities</em> Special?</h2>
+    <div class="per-grid">
+      <div class="per-card rkt reveal-l d2">
+        <div class="who">Representing Roorkee<b>Om Tayal</b></div>
+        <blockquote>In my city, water taught people engineering. A village of mud huts became a city of engineers — the canal built the college, and the college went on to help build modern India.</blockquote>
+        <div class="notes">Deliverable: speak the quote, then add one genuine observation of your own (an evening walk, the fest, the cantonment roads).</div>
+      </div>
+      <div class="per-card josh reveal-r d2">
+        <div class="who">Representing Joshimath<b>Saloni</b></div>
+        <blockquote>In my town, the mountains set the rules. Faith has lived here for over a thousand years, high above the clouds — and the mountains gently remind us that we are guests, not owners.</blockquote>
+        <div class="notes">Deliverable: speak the quote, then add one genuine observation of your own (winter, the temple bells, the ropeway).</div>
+      </div>
+    </div>
+    <div class="shared-line reveal d4">Plains or peaks — our cities are both stories of Uttarakhand: people who made a life <i>between the river and the sky</i>.</div>
+  </div>
+  <div class="pagechip">12 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 13 — CLOSING ════════════════ -->
+<section class="slide s-close" data-speaker="Om + Saloni"
+  data-notes="BOTH: (Stand together, centre.) Different landscapes. Shared heritage. One Uttarakhand. OM: One city learned to command water. SALONI: The other learned to listen to mountains. OM: And the truth is, our state needs both — the engineer and the pilgrim, the canal and the temple, the plain and the peak. SALONI: That is Uttarakhand — one home, many stories. BOTH: Thank you. (Bow.) | Extra context: keep this short and confident — 25–30 seconds total. Alternate the alternating lines crisply; hold the final 'Thank you' on the visual. Invite questions afterwards. | Time: ~30s">
+  <div class="close-strip">
+    <div class="cs grain"><img src="assets/solani_aqueduct_modern.jpg" alt="Solani Aqueduct, Roorkee"><div class="scrim"></div></div>
+    <div class="cs grain"><img src="assets/auli_mountains.jpg" alt="Himalayan peaks above Joshimath"><div class="scrim"></div></div>
+  </div>
+  <div class="close-body">
+    <div class="kicker-c reveal" style="font-family:var(--font-mono);font-size:15px;letter-spacing:.34em;color:rgba(244,239,230,.85)">Two Cities · Two Stories · One Home</div>
+    <h1 class="reveal d1" style="margin-top:20px">Different Landscapes. <em>Shared Heritage.</em><br>One Uttarakhand.</h1>
+    <div class="thanks reveal d2">Thank You</div>
+    <div class="presenters">
+      <div class="pchip reveal d3"><span class="dot"></span><b>Om Tayal</b><span>— Roorkee</span></div>
+      <div class="pchip j reveal d3"><span class="dot"></span><b>Saloni</b><span>— Joshimath</span></div>
+    </div>
+  </div>
+  <div class="pagechip" style="z-index:2">13 / 14</div>
+</section>
+
+<!-- ════════════════ SLIDE 14 — SOURCES & IMAGE CREDITS ════════════════ -->
+<section class="slide s-src" data-speaker="Om + Saloni"
+  data-notes="Reference slide — do not present. It exists for academic credibility and for the teacher to inspect. Full citations with links and image credits are in the companion document 'sources-and-image-credits.md'. | Time: 0s">
+  <div class="slide-inner">
+    <div class="kicker reveal">References · For Inspection, Not Presentation</div>
+    <h2 class="slide-title reveal d1" style="font-size:52px">Sources &amp; Image Credits</h2>
+    <div class="src-grid">
+      <div class="src-col reveal d2">
+        <h4>Roorkee — facts</h4>
+        <ol>
+          <li><b>IIT Roorkee — Institute History &amp; Heritage</b>, iitr.ac.in (college origins, 1847/1854/1949/2001 dates)</li>
+          <li><b>Nagar Nigam Roorkee</b>, nnroorkee.uk.gov.in/about-roorkee (Ain-i-Akbari, Landhaura, pre-1840 village, canal works 1842–54)</li>
+          <li><b>Institution of Civil Engineers</b>, ice.org.uk — “The Ganges Canal” (Cautley, aqueduct geometry)</li>
+          <li><b>Indian Railways historical records</b> &amp; contemporary reports (22 Dec 1851 first freight run, Roorkee–Piran Kaliyar)</li>
+          <li><b>Uttarakhand Tourism</b>, uptourism.gov.in (Piran Kaliyar, Haridwar)</li>
+        </ol>
+        <h4 style="margin-top:22px">Joshimath — facts</h4>
+        <ol>
+          <li><b>Uttarakhand Tourism / Char Dham portals</b> (Jyotirmath, winter seat of Badrinath, distances)</li>
+          <li><b>Mishra Committee Report (1976)</b>, as cited in NDMA (2023) and peer-reviewed literature</li>
+          <li><b>ISRO / NRSC</b> subsidence brief (Jan 2023): 8.9 cm Apr–Nov 2022; 5.4 cm in 12 days</li>
+          <li><b>NDMA &amp; Govt. of Uttarakhand reports (2023)</b>; Wadia Institute of Himalayan Geology</li>
+          <li><b>PTI / ETEnergyworld (18 Aug 2026)</b> — Tapovan-Vishnugad tunnelling halted after seepage</li>
+          <li><b>Peer-reviewed:</b> Awasthi et al., <i>Scientific Reports</i> (2024); Sreejith et al., <i>Geophys. Res. Lett.</i> (2024)</li>
+        </ol>
+      </div>
+      <div class="src-col j reveal d3">
+        <h4>Images — Wikimedia Commons (see credits file for links)</h4>
+        <ol>
+          <li><b>Om Tayal / Saloni</b> — CC BY-SA 4.0, CC BY 2.0 and public-domain files; per-image author &amp; license: “credits_raw.json” + “sources-and-image-credits.md”</li>
+          <li>Archival: W. Simpson canal watercolour (1860, PD); Kurt Boeck, Joshimath 1890s (PD); S. Bourne, canal headworks 1890s (PD); Rijksmuseum, Solani Aqueduct plate (CC0)</li>
+          <li>Modern: Kadyani (Solani Aqueduct aerial, CC0); Kanishk.iitr (IIT Roorkee, CC BY-SA 3.0); Fowler&amp;fowler (canal at Roorkee, CC BY-SA 3.0); Rohit Sharma (Narsingh Temple, VoF, CC BY-SA 4.0); NID chick (Har Ki Pauri, CC BY 2.0); christian0702 (ropeway, CC BY 2.0); Zuck28 &amp; कृष्ण कान्त शर्मा (Piran Kaliyar); Vishwanath Negi (Badrinath, CC BY 4.0); ArmouredCyborg &amp; Navi8apr (Auli); Harshit SR &amp; Naresh Chandra (Hemkund); Shmilyshy (Vishnuprayag); Vaibhav78545 (Auli snow); Rohanshah657 (Joshimath views)</li>
+          <li>Maps, aqueduct &amp; subsidence diagrams: original SVG artwork created for this presentation (not to scale; stylized)</li>
+          <li><b>Note:</b> archival images are presented as archival; no modern photo is captioned as historical.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="src">Full citations: sources-and-image-credits.md · licenses: assets/credits_raw.json</div>
+  <div class="pagechip">14 / 14</div>
+</section>
+
+</main>
+</div>
+
+<div class="deck-progress" id="deckProgress"></div>
+<div class="hint">← → navigate · N notes · E edit text</div>
+<div class="deck-controls">
+  <button id="prevBtn" title="Previous">‹ Prev</button>
+  <span class="count" id="countLabel">1 / 14</span>
+  <button id="nextBtn" title="Next">Next ›</button>
+  <button id="notesBtn" title="Speaker notes (N)">Notes</button>
+</div>
+<div class="notes-overlay" id="notesOverlay">
+  <button class="close-note" id="notesClose">Close (N)</button>
+  <h2 id="notesTitle">Slide notes</h2>
+  <div class="who-tag" id="notesWho"></div>
+  <div class="nbody" id="notesBody"></div>
+</div>
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle" title="Edit mode (E)">✏️ Edit text</button>
+
+<script>
+/* =========================================================
+   PRESENTATION CONTROLLER
+   — fixed-stage scaling, keyboard/wheel/touch navigation,
+     progress bar, speaker-notes overlay (N), inline editing (E)
+   ========================================================= */
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.stage = document.getElementById('deckStage');
+    this.notesOverlay = document.getElementById('notesOverlay');
+    this.notesData = Array.from(this.slides).map(s => ({
+      speaker: s.dataset.speaker || '',
+      notes: s.dataset.notes || '',
+      time: s.dataset.speakerNotesTime || ''
+    }));
+    this.setupStageScale();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheel();
+    this.setupButtons();
+    this.setupNotes();
+    this.setupEditor();
+    // Deep link: present.html#5 opens slide 5 (1-based)
+    const h = parseInt((location.hash || '').replace('#', ''), 10);
+    this.showSlide(Number.isInteger(h) && h >= 1 ? h - 1 : 0);
+  }
+
+  setupStageScale() {
+    const scale = () => {
+      const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const x = (window.innerWidth - 1920 * factor) / 2;
+      const y = (window.innerHeight - 1080 * factor) / 2;
+      this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+    };
+    scale();
+    window.addEventListener('resize', scale);
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (document.body.classList.contains('editing') && e.key !== 'e' && e.key !== 'E') return;
+      if (e.target.getAttribute && e.target.getAttribute('contenteditable') !== null) return;
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); this.next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); this.prev(); }
+      else if (e.key === 'Home') this.showSlide(0);
+      else if (e.key === 'End') this.showSlide(this.slides.length - 1);
+      else if (e.key === 'n' || e.key === 'N') this.toggleNotes();
+      else if (e.key === 'e' || e.key === 'E') editor.toggleEditMode();
+    });
+  }
+
+  setupTouchNav() {
+    let startX = 0;
+    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 60) { dx < 0 ? this.next() : this.prev(); }
+    }, { passive: true });
+  }
+
+  setupWheel() {
+    let wheelLock = false;
+    document.addEventListener('wheel', (e) => {
+      if (this.notesOverlay.classList.contains('open')) return;
+      if (wheelLock) return;
+      wheelLock = true;
+      setTimeout(() => wheelLock = false, 700);
+      e.deltaY > 0 ? this.next() : this.prev();
+    }, { passive: true });
+  }
+
+  setupButtons() {
+    document.getElementById('prevBtn').addEventListener('click', () => this.prev());
+    document.getElementById('nextBtn').addEventListener('click', () => this.next());
+    document.getElementById('notesBtn').addEventListener('click', () => this.toggleNotes());
+  }
+
+  setupNotes() {
+    document.getElementById('notesClose').addEventListener('click', () => this.toggleNotes(false));
+  }
+
+  toggleNotes(force) {
+    const open = force !== undefined ? force : !this.notesOverlay.classList.contains('open');
+    this.notesOverlay.classList.toggle('open', open);
+    if (open) {
+      const d = this.notesData[this.currentSlide];
+      document.getElementById('notesTitle').textContent = `Slide ${this.currentSlide + 1} — speaker notes`;
+      document.getElementById('notesWho').textContent = (d.speaker || '—') + (d.time ? `  ·  suggested time ${d.time}` : '');
+      document.getElementById('notesBody').textContent = d.notes;
+    }
+  }
+
+  setupEditor() {
+    // Inline text editing: hover top-left hotzone, click button, or press E.
+    const hotzone = document.getElementById('editHotzone');
+    const toggle = document.getElementById('editToggle');
+    let hideTimeout = null;
+    const showToggle = () => { clearTimeout(hideTimeout); toggle.classList.add('show'); };
+    const maybeHide = () => { hideTimeout = setTimeout(() => { if (!editor.isActive) toggle.classList.remove('show'); }, 400); };
+    hotzone.addEventListener('mouseenter', showToggle);
+    hotzone.addEventListener('mouseleave', maybeHide);
+    hotzone.addEventListener('click', () => editor.toggleEditMode());
+    toggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    toggle.addEventListener('mouseleave', maybeHide);
+    toggle.addEventListener('click', () => editor.toggleEditMode());
+  }
+
+  next() { this.showSlide(this.currentSlide + 1); }
+  prev() { this.showSlide(this.currentSlide - 1); }
+
+  showSlide(index) {
+    this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+    this.slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === this.currentSlide);
+      slide.classList.toggle('visible', i === this.currentSlide);
+    });
+    document.getElementById('countLabel').textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+    document.getElementById('deckProgress').style.width = `${(this.currentSlide / (this.slides.length - 1)) * 100}%`;
+    if (this.notesOverlay.classList.contains('open')) this.toggleNotes(true);
+  }
+}
+
+/* Inline editor: makes text nodes contenteditable, saves to localStorage */
+class InlineEditor {
+  constructor() {
+    this.isActive = false;
+    this.btn = document.getElementById('editToggle');
+  }
+  toggleEditMode() {
+    this.isActive = !this.isActive;
+    document.body.classList.toggle('editing', this.isActive);
+    this.btn.classList.toggle('active', this.isActive);
+    this.btn.textContent = this.isActive ? '✅ Done editing' : '✏️ Edit text';
+    document.querySelectorAll('.slide .reveal, .slide .slide-title, .slide p, .slide h1, .slide h2, .slide h3, .slide h4, .slide h5, .slide blockquote, .slide .geo, .slide .aq-label, .slide .sub-label, .slide .sub-layer')
+      .forEach(el => {
+        if (!el.matches('svg *')) el.setAttribute('contenteditable', this.isActive ? 'true' : 'false');
+      });
+    if (!this.isActive) this.save();
+  }
+  save() {
+    const stageHTML = document.getElementById('deckStage').innerHTML;
+    try { localStorage.setItem('rkt-josh-deck', stageHTML); } catch (e) { /* storage unavailable */ }
+  }
+  restore() {
+    try {
+      const saved = localStorage.getItem('rkt-josh-deck');
+      if (saved) { /* kept for user's own saved edits; not auto-restored to avoid stale content */ }
+    } catch (e) { /* ignore */ }
+  }
+}
+
+const editor = new InlineEditor();
+new SlidePresentation();
+</script>
+</body>
+</html>

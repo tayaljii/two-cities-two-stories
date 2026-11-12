@@ -1,0 +1,11 @@
+# Deploy only the live deck — keep heavy build artifacts out of the deployment
+Roorkee-Joshimath-Two-Cities-Two-Stories.pptx
+Two-Cities-Two-Stories-share.zip
+Speaker-Notes.pdf
+slide-frames/
+slide-png/
+build_pptx.py
+build_present.py
+build_notes.py
+speaker-notes.md
+README-RUN-ME.txt
