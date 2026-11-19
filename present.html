@@ -339,6 +339,34 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 .edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}
 .edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}
 body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline-offset:3px;border-radius:3px;cursor:text}
+
+/* ════════ SLIDE 15 — ANY QUESTIONS ════════
+   The supplied artwork is 1672×941 — exactly 16:9 — so it fills the
+   stage with no cropping. Nothing is drawn on top of it. */
+.s-aq{background:#000}
+.s-aq img{position:absolute;inset:0;width:1920px;height:1080px;max-width:none;max-height:none;object-fit:cover}
+
+/* ════════ SLIDE 16 — CLOSING FILM ════════
+   A local video file fills the whole stage and plays with its own
+   audio. The title card is dismissed by a click, which is the user
+   gesture browsers require before they will allow sound. */
+.s-film{background:#07090C}
+.s-film video{position:absolute;inset:0;width:1920px;height:1080px;max-width:none;max-height:none;object-fit:cover;background:#07090C;z-index:1}
+.film-card,.film-outro{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(90% 90% at 50% 46%,rgba(20,23,28,.72),rgba(7,9,12,.94));transition:opacity .8s var(--ease),visibility .8s}
+.film-card{cursor:pointer}
+.film-card.gone{opacity:0;visibility:hidden}
+.film-outro{opacity:0;visibility:hidden;cursor:pointer;background:linear-gradient(180deg,#14171C,#07090C)}
+.film-outro.shown{opacity:1;visibility:visible}
+.film-play{width:112px;height:112px;border-radius:50%;border:1px solid var(--sandstone);background:rgba(200,150,90,.14);
+  display:flex;align-items:center;justify-content:center;margin-bottom:34px;transition:transform .4s var(--ease),background .4s ease}
+.film-card:hover .film-play{transform:scale(1.07);background:rgba(200,150,90,.26)}
+.film-play::after{content:"";margin-left:9px;border-left:28px solid var(--sandstone);border-top:18px solid transparent;border-bottom:18px solid transparent}
+.film-kicker{font-family:var(--font-mono);font-size:14.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--sandstone)}
+.film-title{font-family:var(--font-display);font-weight:560;font-size:76px;line-height:1.08;color:var(--paper);margin-top:18px}
+.film-title em{font-style:italic;font-weight:420;color:var(--himalaya-blue-2)}
+.film-sub{font-family:var(--font-body);font-size:20px;color:var(--fog);margin-top:20px;letter-spacing:.02em}
+.film-rule{width:160px;height:2px;background:var(--sandstone);opacity:.7;margin:30px auto 0}
 </style>
 </head>
 <body>
@@ -443,7 +471,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
       </div>
     </div>
   </div>
-  <div class="pagechip">02 / 14</div>
+  <div class="pagechip">02 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 3 — ROORKEE: VILLAGE → ENGINEERING CITY ════════════════ -->
@@ -480,7 +508,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: Nagar Nigam Roorkee (nnroorkee.uk.gov.in); IIT Roorkee Institute History (iitr.ac.in)</div>
-  <div class="pagechip">03 / 14</div>
+  <div class="pagechip">03 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 4 — THE ENGINEERING MARVEL ════════════════ -->
@@ -535,7 +563,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: Institution of Civil Engineers (ice.org.uk, “The Ganges Canal”); Ganges Canal records</div>
-  <div class="pagechip">04 / 14</div>
+  <div class="pagechip">04 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 5 — ENGINEERING LEGACY ════════════════ -->
@@ -559,7 +587,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: IIT Roorkee — Institute History &amp; Heritage (iitr.ac.in); Indian Railways historical records</div>
-  <div class="pagechip">05 / 14</div>
+  <div class="pagechip">05 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 6 — CULTURE & PLACES AROUND ROORKEE ════════════════ -->
@@ -593,7 +621,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: Nagar Nigam Roorkee; Uttarakhand Tourism (uptourism.gov.in)</div>
-  <div class="pagechip">06 / 14</div>
+  <div class="pagechip">06 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 7 — JOSHIMATH: GATEWAY TO THE HIMALAYAS ════════════════ -->
@@ -612,7 +640,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src" style="z-index:2">Photo: Golden evening light above Joshimath · Wikimedia Commons, CC BY-SA 4.0</div>
-  <div class="pagechip" style="z-index:2">07 / 14</div>
+  <div class="pagechip" style="z-index:2">07 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 8 — ANCIENT HERITAGE & SPIRITUAL IDENTITY ════════════════ -->
@@ -635,7 +663,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: Uttarakhand Tourism; Shri Badrinath–Kedarnath Temple Committee (badrinath-kedarnath.gov.in)</div>
-  <div class="pagechip">08 / 14</div>
+  <div class="pagechip">08 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 9 — BEYOND JOSHIMATH ════════════════ -->
@@ -681,7 +709,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Distances approximate (road; treks one-way). Sources: Uttarakhand Tourism · UNESCO whc.unesco.org</div>
-  <div class="pagechip">09 / 14</div>
+  <div class="pagechip">09 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 10 — LAND SUBSIDENCE ════════════════ -->
@@ -741,7 +769,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Sources: Mishra Committee (1976); ISRO/NRSC; NDMA (2023); Wadia Institute; PTI (Aug 2026); Sci. Reports &amp; GRL 2024</div>
-  <div class="pagechip">10 / 14</div>
+  <div class="pagechip">10 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 11 — TWO CITIES, TWO RELATIONSHIPS WITH NATURE ════════════════ -->
@@ -775,7 +803,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
     <div class="cmp-lesson reveal d5">Development and nature must <b>coexist</b> — whether you engineer a river or worship a mountain.</div>
   </div>
-  <div class="pagechip">11 / 14</div>
+  <div class="pagechip">11 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 12 — WHAT MAKES OUR CITIES SPECIAL ════════════════ -->
@@ -798,7 +826,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
     <div class="shared-line reveal d4">Plains or peaks — our cities are both stories of Uttarakhand: people who made a life <i>between the river and the sky</i>.</div>
   </div>
-  <div class="pagechip">12 / 14</div>
+  <div class="pagechip">12 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 13 — CLOSING ════════════════ -->
@@ -817,7 +845,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
       <div class="pchip j reveal d3"><span class="dot"></span><b>Saloni</b><span>— Joshimath</span></div>
     </div>
   </div>
-  <div class="pagechip" style="z-index:2">13 / 14</div>
+  <div class="pagechip" style="z-index:2">13 / 16</div>
 </section>
 
 <!-- ════════════════ SLIDE 14 — SOURCES & IMAGE CREDITS ════════════════ -->
@@ -859,7 +887,38 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
     </div>
   </div>
   <div class="src">Full citations: sources-and-image-credits.md · licenses: assets/credits_raw.json</div>
-  <div class="pagechip">14 / 14</div>
+  <div class="pagechip">14 / 16</div>
+</section>
+
+<!-- ════════════════ SLIDE 15 — ANY QUESTIONS ════════════════ -->
+<section class="slide s-aq" data-speaker="Om + Saloni"
+  data-notes="Open the floor. BOTH: Step forward, pause, and invite questions. Repeat each question out loud before answering so the whole room hears it. If a question needs a number you do not have, say so and offer the source slide instead of guessing. | Time: as long as the class allows">
+  <img src="assets/any_questions.png" alt="Any questions?">
+</section>
+
+<!-- ════════════════ SLIDE 16 — CLOSING FILM ════════════════
+     Local video file: plays full screen with its own audio, so it
+     needs no internet connection and no embedded player. -->
+<section class="slide s-film" data-speaker="Om + Saloni"
+  data-notes="Final beat. Click the card once to start the film — it plays with sound and runs about 13 seconds. Let it finish in silence, then thank the class. Nothing more to say over it. | Time: ~15s">
+  <video id="filmVideo" src="assets/video/ending-animation.mp4" playsinline preload="auto" controls></video>
+
+  <!-- Title card — click to play with sound -->
+  <div class="film-card" id="filmCard">
+    <div class="film-play" aria-hidden="true"></div>
+    <div class="film-kicker">Finale</div>
+    <h2 class="film-title">Thank You for <em>Listening</em></h2>
+    <div class="film-sub">Om Tayal &amp; Saloni  ·  Two Cities. Two Stories.</div>
+    <div class="film-sub" style="font-family:var(--font-mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin-top:26px">Click to play with sound</div>
+  </div>
+
+  <!-- Closing card — appears when the film ends -->
+  <div class="film-outro" id="filmOutro">
+    <div class="film-kicker">Two Cities · Two Stories · One Home</div>
+    <h2 class="film-title">Different Landscapes.<br><em>Shared Heritage.</em></h2>
+    <div class="film-rule"></div>
+    <div class="film-sub">One Uttarakhand.</div>
+  </div>
 </section>
 
 </main>
@@ -869,7 +928,7 @@ body.editing [contenteditable]{outline:1.5px dashed rgba(200,150,90,.65);outline
 <div class="hint">← → navigate · N notes · E edit text</div>
 <div class="deck-controls">
   <button id="prevBtn" title="Previous">‹ Prev</button>
-  <span class="count" id="countLabel">1 / 14</span>
+  <span class="count" id="countLabel">1 / 16</span>
   <button id="nextBtn" title="Next">Next ›</button>
   <button id="notesBtn" title="Speaker notes (N)">Notes</button>
 </div>
@@ -926,6 +985,9 @@ class SlidePresentation {
     document.addEventListener('keydown', (e) => {
       if (document.body.classList.contains('editing') && e.key !== 'e' && e.key !== 'E') return;
       if (e.target.getAttribute && e.target.getAttribute('contenteditable') !== null) return;
+      // While the closing film has focus, let the player keep space / arrows
+      if (e.target && e.target.tagName === 'VIDEO' &&
+          (e.key === ' ' || e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); this.next(); }
       else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); this.prev(); }
       else if (e.key === 'Home') this.showSlide(0);
@@ -1000,6 +1062,14 @@ class SlidePresentation {
       slide.classList.toggle('active', i === this.currentSlide);
       slide.classList.toggle('visible', i === this.currentSlide);
     });
+    // Leaving the final slide: stop and rewind the film, restore its title card
+    const film = document.getElementById('filmVideo');
+    if (film && !this.slides[this.currentSlide].classList.contains('s-film')) {
+      film.pause();
+      film.currentTime = 0;
+      document.getElementById('filmCard').classList.remove('gone');
+      document.getElementById('filmOutro').classList.remove('shown');
+    }
     document.getElementById('countLabel').textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
     document.getElementById('deckProgress').style.width = `${(this.currentSlide / (this.slides.length - 1)) * 100}%`;
     if (this.notesOverlay.classList.contains('open')) this.toggleNotes(true);
@@ -1037,6 +1107,28 @@ class InlineEditor {
 
 const editor = new InlineEditor();
 new SlidePresentation();
+
+/* Closing film: click the title card to play it with sound.
+   Playback is user-initiated, which is what browsers require before
+   they allow audio. When the clip ends, the closing card appears;
+   clicking that replays the film. */
+(function setupFilm() {
+  const film  = document.getElementById('filmVideo');
+  const card  = document.getElementById('filmCard');
+  const outro = document.getElementById('filmOutro');
+  if (!film || !card) return;
+  const start = () => {
+    card.classList.add('gone');
+    outro.classList.remove('shown');
+    film.muted = false;
+    film.volume = 1;
+    film.currentTime = 0;
+    film.play().catch(() => card.classList.remove('gone'));
+  };
+  card.addEventListener('click', start);
+  outro.addEventListener('click', start);
+  film.addEventListener('ended', () => outro.classList.add('shown'));
+})();
 </script>
 </body>
 </html>
